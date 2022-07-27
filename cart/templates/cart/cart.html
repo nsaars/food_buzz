@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- Shop Cart Page Section start here -->
+    <div class="shop-cart padding-tb">
+        <div class="container">
+            <div class="section-wrapper">
+                <div class="cart-top">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cart_product in cart_products%}
+                                <tr class="cart-product">
+                                    <td class="product-item">
+                                        <div class="p-thumb">
+                                            <a href="#"><img src="{{ cart_product.product.image.image.url }}" alt="product"></a>
+                                        </div>
+                                        <div class="p-content">
+                                            <a href="{{ cart_product.product.get_absolute_url }}" class="product-title">{{ cart_product.product.title }}</a>
+                                        </div>
+                                    </td>
+                                    <td>$ <span class="product-price">{{ cart_product.price }}</span></td>
+                                    <td>
+                                        <div class="cart-plus-minus">
+                                            <div class="dec qtybutton">-</div>
+                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value={{ cart_product.quantity }} readonly>
+                                            <div class="inc qtybutton">+</div>
+                                        </div>
+                                    </td>
+                                    <td>$<span class="product-total">{{ cart_product.total_price }}</span></td>
+                                    <td>
+                                        <i class="remove-button"><img src="{% static 'images/shop/del.png' %}" alt="product"></i>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cart-bottom">
+                    <div class="shiping-box">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <form action="" method="post">
+                                    {{ form.non_field_errors }}
+                                    {% csrf_token %}
+                                    <div class="calculate-shiping">
+                                        <h4>Доставка</h4>
+                                        <div class="outline-select">
+                                            {{ form.shipping_city }}
+                                            <span class="select-icon"><i class="icofont-caret-down"></i></span>
+                                        </div>
+                                        {{ form.shipping_address }}
+                                        {{ form.phone_number }}
+                                        {{ form.phone_number.errors }}
+                                    </div>
+                                    <div class="cart-checkout-box">
+                                        <div class="cart-checkout order-button">
+                                            {% if cart_products|length > 0 %}
+                                                <input type="submit" value="Заказать" style="margin-left: 250px">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="cart-overview">
+                                    <h4>Итоги заказа</h4>
+                                    <ul>
+                                        <li>
+                                            <span class="pull-left">Итоги корзины</span>
+                                            <p class="pull-right">$ <span class="cart-total">{{ cart_total }}</span>.00</p>
+                                        </li>
+                                        <li>
+                                            <span class="pull-left">Доставка</span>
+                                            <p class="pull-right">$<span class="shiping-price">{{ shipping_price }}</span></p>
+                                        </li>
+                                        <li>
+                                            <span class="pull-left">Общая стоимость</span>
+                                            <p class="pull-right">$ <span class="order-total">{{ cart_total }}</span>.00</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Shop Cart Page Section ending here -->
+{% endblock content %}
+
+{% block javascript %}
+
+{% endblock javascript %}
+
