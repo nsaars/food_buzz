@@ -1,0 +1,70 @@
+/* @@@@@@@@@@@@@  Banner Section Start Here  @@@@@@@@@@@@@@ */
+.banner-area {
+    padding: 100px 0;
+    background-position: right;
+    @extend %rel;
+    .overlay {
+        background: rgba(0, 0, 0, .1);
+        @include breakpoint(xl) {
+            display: none;
+        }
+    }
+    @include breakpoint(lg) {
+        padding: 150px 0;
+        background-position: center;
+    }
+    @include breakpoint(xxl) {
+        padding: 300px 0;
+    }
+    .banner-content {
+        z-index: 1;
+        @extend %rel;
+        >span {
+            margin-top: -12px;
+            color: $primary-color;
+            display: inline-block;
+            font-size: 20px;
+            text-transform: capitalize;
+            @include breakpoint(sm) {
+                font-size: 30px;
+            }
+        }
+        
+        h2 {
+            margin: 0;  
+            color: $theme-color;
+            font-size: 42px;
+            @include breakpoint(sm) {
+                font-size: 56px;
+                line-height: 66px;
+            }
+            @include breakpoint(lg) {
+                font-size: 82px;
+                line-height: 92px;
+            }
+        }
+        h3 {
+            font-size: 24px;
+            margin: 0;
+            line-height: 1.5;
+            color: $title-color;
+            @include breakpoint(sm) {
+                font-size: 36px;
+            }
+        }
+        .banner-btn-group {
+            @extend %flex;
+            justify-content: center;
+            margin-top: 35px;
+            a {
+                margin-right: 25px;
+                &:last-child {
+                    margin-right: 0;
+                }
+                @include breakpoint(max-340) {
+                    margin: 5px;
+                }
+            }
+        }
+    }
+}
