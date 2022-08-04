@@ -12,7 +12,7 @@ from django.views.generic import FormView
 from cart.forms import ShippingDataForm
 from cart.models import AvailableCity, OrderDetails, Order
 
-from shop.models import Product
+from shop.models import Product, ProductImage
 
 
 class CartView(DataMixin, FormView):
@@ -44,7 +44,7 @@ class CartView(DataMixin, FormView):
         cart = Cart(self.request)
         context['available_cities'] = AvailableCity.objects.all()
         context['cart_total'] = cart.get_total_price()
-        context['cart_products'] = [cart_product for cart_product in cart]
+        context['cart_products_with_image'] = [(cart_product, ProductImage.objects.filter(product=cart_product['product']).first()) for cart_product in cart]
         shipping_price = 0
         if 'form' in kwargs:
             shipping_price = kwargs['form'].cleaned_data['shipping_city'].shipping_price

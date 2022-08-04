@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-0g&(k%e1fl&rskb9u8al=@3!*q(8_mok)nh&rlsj%12r26%8ub
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.0.104']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -86,14 +86,13 @@ WSGI_APPLICATION = 'food_buzz.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'food_buzz',
-        'USER': 'postgres',
-        'PASSWORD': 'pulat',
-        'HOST': '127.0.0.1',
+        'NAME': os.environ['POSTGRES_NAME'],
+        'USER': os.environ['POSTGRES_USER'],
+        'PASSWORD': os.environ['POSTGRES_PASSWORD'],
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

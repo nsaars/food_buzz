@@ -3,7 +3,6 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 
-from home.models import Page
 from home.utils import DataMixin
 
 from login.forms import LoginUserForm

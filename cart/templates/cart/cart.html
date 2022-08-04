@@ -19,11 +19,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for cart_product in cart_products%}
+                            {% for cart_product, product_image in cart_products_with_image %}
                                 <tr class="cart-product">
                                     <td class="product-item">
                                         <div class="p-thumb">
-                                            <a href="#"><img src="{{ cart_product.product.image.image.url }}" alt="product"></a>
+                                            <a href="#"><img src="{{ product_image.image.url }}" alt="product"></a>
                                         </div>
                                         <div class="p-content">
                                             <a href="{{ cart_product.product.get_absolute_url }}" class="product-title">{{ cart_product.product.title }}</a>

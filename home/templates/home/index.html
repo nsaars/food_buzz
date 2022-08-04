@@ -60,11 +60,11 @@
                 </div>
                 <div class="section-wrapper">
                     <div class="row">
-                        {% for special_product in special_products %}
+                        {% for special_product, product_image in special_products_with_image %}
                             <div class="col-xl-3 col-md-6 col-12">
                                 <div class="product-item">
                                     <div class="product-thumb">
-                                        <img src="{{ special_product.product.image.image.url }}" alt="food-product">
+                                        <img src="{{ product_image.image.url }}" alt="food-product">
                                         <span class="price">${{ special_product.product.price }}</span>
                                     </div>
                                     <div class="product-content">
@@ -89,7 +89,7 @@
                 </div>
                 <div class="section-wrapper">
                     <ul class="tab-bar">
-                        {% for category, products in products_by_category %}
+                        {% for category, products in products_with_image_by_category %}
 
                             {% if forloop.first %}
                                 <li class="tablinks" id="defaultOpen" onclick="openCity(event, '{{ category.slug }}')">
@@ -103,14 +103,14 @@
 
                         {% endfor %}
                     </ul>
-                    {% for category, products in products_by_category %}
+                    {% for category, products_with_image in products_with_image_by_category %}
                         <div id="{{ category.slug }}" class="tabcontent">
                             <div class="row no-gutters">
-                                {% for product in products %}
+                                {% for product, product_image in products_with_image %}
                                     <div class="col-lg-6 col-12">
                                         <div class="product-item style-2">
                                             <div class="product-thumb">
-                                                <img src="{{ product.image.image.url }}" alt="food-product">
+                                                <img src="{{ product_image.image.url }}" alt="food-product">
                                                 <span class="price">${{ product.price }}</span>
                                             </div>
                                             <div class="product-content">

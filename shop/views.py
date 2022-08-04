@@ -9,11 +9,11 @@ from home.utils import DataMixin
 class ShopListView(DataMixin, ListView):
     model = Product
     template_name = 'shop/shop.html'
-    context_object_name = 'products'
+    context_object_name = 'products_with_image'
     paginate_by = 4
 
     def get_queryset(self):
-        return Product.objects.all()
+        return [(product, ProductImage.objects.filter(product=product).first()) for product in Product.objects.all()]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -29,6 +29,5 @@ class ProductDetailView(DataMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['images'] = ProductImage.objects.filter(_product__slug=self.kwargs['product_slug'])
-        print(context['images'])
+        context['images'] = ProductImage.objects.filter(product__slug=self.kwargs['product_slug'])
         return dict(self.get_page_context() | context)

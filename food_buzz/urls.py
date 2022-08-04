@@ -11,6 +11,7 @@ from contact import urls as contact_urls
 from cart import urls as cart_urls
 from register import urls as register_urls
 from login import urls as login_urls
+from login.views import logout_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(home_urls)),
@@ -21,6 +22,7 @@ urlpatterns = [
     path('cart/', include(cart_urls)),
     path('register/', include(register_urls)),
     path('login/', include(login_urls)),
+    path('logout/', logout_view, name='logout')
 
 ]
 

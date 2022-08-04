@@ -27,7 +27,6 @@ class Product(models.Model):
     slug = models.SlugField(unique=True, db_index=True)
     price = models.IntegerField()
     description = models.TextField()
-    image = models.ForeignKey('ProductImage', on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -45,7 +44,7 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
     image = models.ImageField(upload_to='product/%Y/%m/%d', blank=True)
-    _product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Фото"
@@ -53,4 +52,4 @@ class ProductImage(models.Model):
         ordering = ["product"]
 
     def __str__(self):
-        return f"{self._product}"
+        return f"{self.product}"
