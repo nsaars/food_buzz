@@ -1,6 +1,8 @@
 from decimal import Decimal
 from django.conf import settings
-from shop.models import Product
+from django.db.models import Q
+
+from shop.models import Product, ProductImage
 
 
 class Cart(object):
@@ -50,12 +52,16 @@ class Cart(object):
         return sum(item['quantity'] for item in self.cart.values())
 
     def __iter__(self):
-        product_ids = self.cart.keys()
-        products = Product.objects.filter(id__in=product_ids)
-        for product in products:
+        products_with_image = self.get_cart_products_with_images()
+        for product, product_image in products_with_image:
             self.cart[str(product.id)]['product'] = product
+            self.cart[str(product.id)]['image'] = product_image
 
         for item in self.cart.values():
             item['price'] = Decimal(item['price'])
             item['total_price'] = item['price'] * item['quantity']
             yield item
+
+    def get_cart_products_with_images(self):
+        product_ids = self.cart.keys()
+        return Product.get_products_with_images(product_ids)

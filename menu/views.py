@@ -9,9 +9,7 @@ class MenuPageView(DataMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        products_by_category = {}
-        categories = Category.objects.order_by('menu_order').all()
-        for category in categories:
-            products_by_category[category] = [(product, ProductImage.objects.filter(product=product).first()) for product in Product.objects.filter(category=category)]
-        context['products_with_image_by_category'] = products_by_category.items()
+
+        context['products_with_image_by_category'] = Category.get_products_with_image_by_category()
+
         return dict(self.get_page_context() | context)

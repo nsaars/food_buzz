@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from cart.models import AvailableCity
 from home.models import TodaySpecialProduct
 from shop.models import Product, ProductImage, Category
@@ -28,10 +30,10 @@ ProductImage.objects.create(image="product/2022/08/04/kish-s-gribami-475x317_wIY
 ProductImage.objects.create(image="product/2022/08/04/KurinajaLapscha.jpg", product_id=3)
 ProductImage.objects.create(image="product/2022/08/04/myasnoi-475x317.jpg", product_id=4)
 
-TodaySpecialProduct.objects.create(product_id=2, date='2022-08-04')
-TodaySpecialProduct.objects.create(product_id=1, date='2022-08-04')
-TodaySpecialProduct.objects.create(product_id=4, date='2022-08-04')
-TodaySpecialProduct.objects.create(product_id=5, date='2022-08-04')
+TodaySpecialProduct.objects.create(product_id=2, date=datetime.today())
+TodaySpecialProduct.objects.create(product_id=1, date=datetime.today())
+TodaySpecialProduct.objects.create(product_id=4, date=datetime.today())
+TodaySpecialProduct.objects.create(product_id=5, date=datetime.today())
 
 AvailableCity.objects.create(title="Москва", shipping_price=2)
 AvailableCity.objects.create(title="Париж", shipping_price=123456)

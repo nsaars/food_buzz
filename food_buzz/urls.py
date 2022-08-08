@@ -12,6 +12,7 @@ from cart import urls as cart_urls
 from register import urls as register_urls
 from login import urls as login_urls
 from login.views import logout_view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(home_urls)),
@@ -27,5 +28,11 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    import debug_toolbar
+    import mimetypes
 
+    mimetypes.add_type("application/javascript", ".js", True)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns = [
+                      path('__debug__/', include(debug_toolbar.urls)),
+                  ] + urlpatterns

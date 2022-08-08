@@ -65,11 +65,11 @@
                                 <div class="product-item">
                                     <div class="product-thumb">
                                         <img src="{{ product_image.image.url }}" alt="food-product">
-                                        <span class="price">${{ special_product.product.price }}</span>
+                                        <span class="price">${{ special_product.price }}</span>
                                     </div>
                                     <div class="product-content">
-                                        <p>{{ special_product.product.category.title }}</p>
-                                        <h6><a href="{% url 'product' special_product.product.slug %}">{{ special_product.product.title }}</a></h6>
+                                        <p>{{ special_product.category.title }}</p>
+                                        <h6><a href="{% url 'product' special_product.slug %}">{{ special_product.title }}</a></h6>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                 </div>
                 <div class="section-wrapper">
                     <ul class="tab-bar">
-                        {% for category, products in products_with_image_by_category %}
+                        {% for category, _ in products_with_image_by_category %}
 
                             {% if forloop.first %}
                                 <li class="tablinks" id="defaultOpen" onclick="openCity(event, '{{ category.slug }}')">

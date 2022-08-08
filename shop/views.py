@@ -13,7 +13,7 @@ class ShopListView(DataMixin, ListView):
     paginate_by = 4
 
     def get_queryset(self):
-        return [(product, ProductImage.objects.filter(product=product).first()) for product in Product.objects.all()]
+        return Product.get_products_with_images()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
