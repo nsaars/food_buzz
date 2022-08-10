@@ -1,15 +1,15 @@
 from django.db import models
 from django.db.models import Q
-from django.db.models.signals import post_init, post_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, db_index=True)
-    image = models.ImageField(upload_to='category', blank=True)
-    menu_order = models.IntegerField(unique=True)
+    title = models.CharField(max_length=255, verbose_name='Заголовок')
+    slug = models.SlugField(unique=True, db_index=True, verbose_name='Слаг')
+    image = models.ImageField(upload_to='category', blank=True, verbose_name='Изображение')
+    menu_order = models.IntegerField(unique=True, verbose_name='Порядок в меню')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -33,12 +33,12 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    title = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, db_index=True)
-    price = models.IntegerField()
-    description = models.TextField()
-    has_image = models.BooleanField(default=False)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='Категория')
+    title = models.CharField(max_length=255, verbose_name='Заголовок')
+    slug = models.SlugField(unique=True, db_index=True, verbose_name='Слаг')
+    price = models.IntegerField(verbose_name='Цена')
+    description = models.TextField(verbose_name='Описание')
+    has_image = models.BooleanField(default=False, verbose_name='Наличие изображения')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

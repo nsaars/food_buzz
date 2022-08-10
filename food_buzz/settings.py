@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'food_buzz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ['POSTGRES_NAME'],
@@ -90,9 +90,9 @@ DATABASES = {
         'HOST': 'db',
         'PORT': '5432',
     }
-}
+}"""
 
-"""DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'shop',
@@ -101,7 +101,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',
     }
-}"""
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
